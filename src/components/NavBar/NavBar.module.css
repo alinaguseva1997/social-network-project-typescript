@@ -1,8 +1,13 @@
 .nav {
     grid-area: nav;
     background-color: mistyrose;
+    padding: 20px;
 }
 
-.item {
-    color: white;
+ .item a{
+    text-decoration: none;
+}
+
+.item_active {
+    color: red;
 }
