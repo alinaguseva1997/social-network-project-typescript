@@ -1,29 +1,27 @@
 import React from "react";
 import styles from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
-import {NavBar} from "../NavBar/NavBar";
-import {DialogItem} from "./DialogItem";
-import {Message} from "./Message";
+import {DialogItem} from "./DialogsItem/DialogItem";
+import {Message} from "./Message/Message";
+import {dialogsDataType, dialogsPageType, messagesDataType} from "../../redux/state";
 
-export function Dialogs() {
+type DialogsPropsType = {
+    state: dialogsPageType
+}
+
+export function Dialogs(props: DialogsPropsType) {
+
+    const messagesDataMap = props.state.messages.map(message => <Message message={message.message}/>)
+    const dialogsDataMap = props.state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+
     return (
         <div>
             <div className={styles.dialogs}>
                 <div className={styles.dialogs_item}>
-                    <DialogItem name='Dimych' id='1'/>
-                    <DialogItem name='Andrey' id='2'/>
-                    <DialogItem name='Sweta' id='3'/>
-                    <DialogItem name='Sasha' id='4'/>
-                    <DialogItem name='Victor' id='5'/>
-                    <DialogItem name='Valera' id='6'/>
+                    {dialogsDataMap}
                 </div>
 
                 <div className={styles.messages}>
-                    <Message message='Hi'/>
-                    <Message message='How is your it'/>
-                    <Message message='Yo'/>
-                    <Message message='Yo'/>
-                    <Message message='Yo'/>
+                    {messagesDataMap}
                 </div>
             </div>
         </div>
