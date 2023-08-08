@@ -6,7 +6,7 @@ export function ProfileInfo() {
         <>
             <div>
                 <img
-                    src="https://playboyrussia.com/images/cache/2022/2/3/fit_930_519_false_crop_1109_623_0_229_q90_848721_d304741806493f7cc136c8050.jpeg"
+                    src="https://img.freepik.com/premium-photo/christian-woman-holds-bible-in-her-hands-reading-the-holy-bible-on-the-sea-during-beautiful-sunset_176445-5868.jpg?w=740"
                     alt="image"/>
             </div>
             <div className={styles.descriptionBlock}>
