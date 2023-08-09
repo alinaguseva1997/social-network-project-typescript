@@ -1,13 +1,13 @@
 import React, {ChangeEvent} from "react";
 import {Post} from './Post/Post'
 import styles from './MyPosts.module.css'
-import {postsDataType} from "../../../redux/state";
+import {ActionType, postsDataType} from "../../../redux/state";
+import {access} from "fs";
 
 type MyPostsPropsType = {
     postsData: postsDataType[]
-    addPost: () => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 export function MyPosts(props: MyPostsPropsType) {
@@ -17,13 +17,13 @@ export function MyPosts(props: MyPostsPropsType) {
     let newPostEl = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
-            props.addPost()
+            props.dispatch({type: "ADD-POST"})
     }
 
     const onPostChangeHangler = () => {
         if (newPostEl.current) {
-            let text = newPostEl.current.value
-            props.updateNewPostText(text)
+            let newText = newPostEl.current.value
+            props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText})
         }
     }
 

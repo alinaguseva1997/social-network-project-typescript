@@ -2,19 +2,18 @@ import React from "react";
 import styles from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {profilePageType} from "../../redux/state";
+import {ActionType, profilePageType} from "../../redux/state";
 
 type ProfilePropsType = {
     state: profilePageType
-    addPost:() => void
-    updateNewPostText: (newText: string) => void
+    dispatch:(action: ActionType) => void
 }
 
 export function Profile(props: ProfilePropsType) {
     return (
         <div>
             <ProfileInfo />
-            <MyPosts postsData = {props.state.posts} addPost = {props.addPost} updateNewPostText={props.updateNewPostText} newPostText={props.state.newPostText}/>
+            <MyPosts postsData = {props.state.posts} dispatch={props.dispatch} newPostText={props.state.newPostText}/>
         </div>
     )
 }

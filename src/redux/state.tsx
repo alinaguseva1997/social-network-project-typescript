@@ -4,9 +4,8 @@ export type storeType = {
     _state: stateType
     getState: () => stateType
     _callSubscriber: (state: stateType) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
     subscribe: (observer: (state: stateType) => void) => void
+    dispatch: (action: ActionType) => void
 }
 export type stateType = {
     profilePage: profilePageType
@@ -36,6 +35,14 @@ export type postsDataType = {
     id: number
     message: string
     likesCount: number
+}
+export type ActionType = AddPostActionType | UpdateNewPostTextActionType
+export type AddPostActionType = {
+    type: 'ADD-POST'
+}
+export type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
 }
 
 let store: storeType = {
@@ -69,27 +76,29 @@ let store: storeType = {
     _callSubscriber() {
         console.log('State chanced')
     },
+
     getState () {
         return this._state
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText (newText) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state);
-    },
     subscribe(observer) {
         this._callSubscriber = observer
-    }
+    },
 
+    dispatch (action: ActionType) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state);
+        }
+    }
 }
 
 export default store;

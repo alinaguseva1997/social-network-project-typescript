@@ -8,12 +8,11 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {stateType} from "./redux/state";
+import {ActionType, stateType} from "./redux/state";
 
 type AppPropsType = {
     state: stateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 function App(props:AppPropsType) {
@@ -23,7 +22,7 @@ function App(props:AppPropsType) {
                 <NavBar/>
                 <div className='app-wrapper-content'>
                     <Route exact path = '/dialogs' render={()=> <Dialogs state={props.state.dialogsPage} />}/>
-                    <Route path = '/profile' render={() => <Profile state ={props.state.profilePage} addPost = {props.addPost} updateNewPostText = {props.updateNewPostText}/>}/>
+                    <Route path = '/profile' render={() => <Profile state ={props.state.profilePage} dispatch = {props.dispatch} />}/>
                     <Route path = '/news' render={() => <News />}/>
                     <Route path = '/music' render={() => <Music />}/>
                     <Route path = '/settings' render={() => <Settings />}/>
