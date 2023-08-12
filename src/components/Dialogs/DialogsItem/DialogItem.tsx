@@ -12,7 +12,9 @@ export function DialogItem(props: DialogItemPropsType) {
     return (
         <div className={styles.dialog}>
             <NavLink to={path}
-                     activeClassName={styles.dialog + ' ' + styles.active}>{props.name}</NavLink>
+                     activeClassName={styles.dialog + ' ' + styles.active}>
+                {props.name}
+            </NavLink>
         </div>
     )
 }

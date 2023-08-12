@@ -1,8 +1,8 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {Post} from './Post/Post'
 import styles from './MyPosts.module.css'
 import {ActionType, postsDataType} from "../../../redux/state";
-import {access} from "fs";
+import {addPostAC, updateNewPostTextAC} from "../../../redux/profilePage-reducer";
 
 type MyPostsPropsType = {
     postsData: postsDataType[]
@@ -17,13 +17,13 @@ export function MyPosts(props: MyPostsPropsType) {
     let newPostEl = React.createRef<HTMLTextAreaElement>();
 
     const addPost = () => {
-            props.dispatch({type: "ADD-POST"})
+            props.dispatch(addPostAC())
     }
 
     const onPostChangeHangler = () => {
         if (newPostEl.current) {
             let newText = newPostEl.current.value
-            props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText})
+            props.dispatch(updateNewPostTextAC(newText))
         }
     }
 

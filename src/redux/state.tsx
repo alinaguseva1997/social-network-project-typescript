@@ -1,4 +1,7 @@
 import React from 'react';
+import {AddPostActionType, ProfilePageReducer, UpdateNewPostTextActionType} from "./profilePage-reducer";
+import {DialogsPageReducer, sendNewMessageTextActionType, UpdateNewMessageTextActionType} from "./dialogsPage-reducer";
+import {SidebarReducer} from "./sidebar-reducer";
 
 export type storeType = {
     _state: stateType
@@ -19,6 +22,7 @@ export type profilePageType ={
 export type dialogsPageType = {
     dialogs: dialogsDataType[]
     messages: messagesDataType[]
+    newMessageText: string
 }
 export type sidebarType = {
 
@@ -36,14 +40,11 @@ export type postsDataType = {
     message: string
     likesCount: number
 }
-export type ActionType = AddPostActionType | UpdateNewPostTextActionType
-export type AddPostActionType = {
-    type: 'ADD-POST'
-}
-export type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
+export type ActionType =
+    | AddPostActionType
+    | UpdateNewPostTextActionType
+    | UpdateNewMessageTextActionType
+    | sendNewMessageTextActionType
 
 let store: storeType = {
     _state: {
@@ -69,35 +70,25 @@ let store: storeType = {
                 {id: 3, message: 'Yo'},
                 {id: 4, message: 'Yo'},
                 {id: 5, message: 'Yo'},
-            ]
+            ],
+            newMessageText: '',
         },
         sidebar: {}
     }, //приватное св-во
     _callSubscriber() {
         console.log('State chanced')
     },
-
     getState () {
         return this._state
     },
     subscribe(observer) {
         this._callSubscriber = observer
     },
-
     dispatch (action: ActionType) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            };
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
+            this._state.profilePage = ProfilePageReducer(this._state.profilePage, action)
+            this._state.dialogsPage = DialogsPageReducer(this._state.dialogsPage, action)
+            this._state.sidebar = SidebarReducer(this._state.sidebar, action)
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber(this._state);
-        }
     }
 }
 
