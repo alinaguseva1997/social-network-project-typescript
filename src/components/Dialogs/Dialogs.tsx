@@ -2,39 +2,41 @@ import React, {ChangeEvent} from "react";
 import styles from './Dialogs.module.css'
 import {DialogItem} from "./DialogsItem/DialogItem";
 import {Message} from "./Message/Message";
-import {ActionType, dialogsPageType} from "../../redux/state";
-import {sendNewMessageTextAC, updateNewMessageTextAC} from "../../redux/dialogsPage-reducer";
+import {ActionType, dialogsPageType} from "../../redux/store";
 
 type DialogsPropsType = {
     state: dialogsPageType
-    dispatch: (action: ActionType) => void
+    sendNewMessageText: () => void
+    updateNewMessageText: (body: string) => void
+    newMessageText: string
 }
 
 export function Dialogs(props: DialogsPropsType) {
 
-    const messagesDataMap = props.state.messages.map(message => <Message message={message.message}/>)
-    const dialogsDataMap = props.state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+    let dialogsMap = props.state.dialogs.map(el => <DialogItem name={el.name} id={el.id} />)
+    let messagesMap = props.state.messages.map(el => <Message message={el.message} />)
+
     const onClickSendMessageHandler = () => {
-        props.dispatch(sendNewMessageTextAC(props.state.newMessageText))
+        props.sendNewMessageText()
     }
     let onNewMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageTextAC(e.currentTarget.value))
+        props.updateNewMessageText(e.currentTarget.value)
     }
 
     return (
         <div>
             <div className={styles.dialogs}>
                 <div className={styles.dialogs_item}>
-                    {dialogsDataMap}
+                    {dialogsMap}
                 </div>
                 <div className={styles.messages}>
-                    {messagesDataMap}
+                    {messagesMap}
                 </div>
             </div>
             <div>
                 <textarea onChange={onNewMessageChangeHandler}
                           placeholder='Enter your message'
-                          value={props.state.newMessageText}/>
+                          value={props.newMessageText}/>
             </div>
             <button onClick={onClickSendMessageHandler}>Send</button>
 
