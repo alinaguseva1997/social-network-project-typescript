@@ -3,7 +3,7 @@ import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import React from "react";
 import {stateType, store } from "./redux/redux-store";
-import {Provider } from "./StoreContext";
+import {Provider} from "react-redux";
 
 let rerenderEntireTree = (state: stateType) => {
     ReactDOM.render(
