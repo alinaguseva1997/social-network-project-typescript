@@ -5,18 +5,11 @@ import React from "react";
 import {stateType, store } from "./redux/redux-store";
 import {Provider} from "react-redux";
 
-let rerenderEntireTree = (state: stateType) => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store = {store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>,
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>,
     document.getElementById('root')
 );
-}
-
-rerenderEntireTree(store.getState());
-store.subscribe(()=> {
-    rerenderEntireTree(store.getState());
-})

@@ -31,7 +31,7 @@ export const DialogsPageReducer = (state = initialState, action:ActionType) => {
         }
         case 'UPDATE-NEW-MESSAGE-TEXT' : {
             let stateCopy = {...state}
-           stateCopy.newMessageText = action.newMessage
+            stateCopy.newMessageText = action.newMessage
             return stateCopy;
         }
         default: {
@@ -46,6 +46,7 @@ export const updateNewMessageTextAC = (newMessage: string) => {
         newMessage: newMessage
     } as const
 }
+
 export const sendNewMessageTextAC = (newMessage: string) => {
     return {
         type: "SEND-MESSAGE",
