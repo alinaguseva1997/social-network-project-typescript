@@ -5,7 +5,7 @@ type MessagePropsType = {
     message: string
 }
 
-export function Message(props: MessagePropsType) {
+export const Message = (props: MessagePropsType) => {
     return (
         <div className={styles.message}>{props.message}</div>
     )
