@@ -14,7 +14,6 @@ export const UsersReducer = (state = initialState, action: any) => {
             return {...state, users: [...state.users, ...action.users]}
         }
         case 'UNFOLLOW' : {
-            debugger
             return {...state,  users: state.users.map(el => el.id === action.userID ? {...el, followed: false} : el)}
         }
         case 'FOLLOW' : {
