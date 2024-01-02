@@ -2,7 +2,13 @@ import {combineReducers, createStore} from "redux";
 import {AddPostActionType, ProfilePageReducer, UpdateNewPostTextActionType} from "./profilePage-reducer";
 import {DialogsPageReducer, sendNewMessageTextActionType, UpdateNewMessageTextActionType} from "./dialogsPage-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
-import {followActionType, setUsersActionType, unfollowActionType, UsersReducer} from "./users-reducer";
+import {
+    followActionType,
+    setCurrentPageAC, setCurrentPageActionType, setTotalUsersCountActionType,
+    setUsersActionType,
+    unfollowActionType,
+    UsersReducer
+} from "./users-reducer";
 
 export type StoreType = any
 export type stateType = {
@@ -38,6 +44,9 @@ export type postsDataType = {
 }
 export type UsersPageType = {
     users: UsersType[]
+    pageSize: number,
+    totalCount: number
+    currentPage: number
 }
 export type UsersType = {
     id: number
@@ -55,6 +64,8 @@ export type ActionType =
 | followActionType
 | unfollowActionType
 | setUsersActionType
+| setCurrentPageActionType
+| setTotalUsersCountActionType
 
 export const rootReducer = combineReducers({
     profilePage: ProfilePageReducer,
