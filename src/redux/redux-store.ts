@@ -4,7 +4,7 @@ import {DialogsPageReducer, sendNewMessageTextActionType, UpdateNewMessageTextAc
 import {SidebarReducer} from "./sidebar-reducer";
 import {
     followActionType,
-    setCurrentPageAC, setCurrentPageActionType, setTotalUsersCountActionType,
+    setCurrentPage, setCurrentPageActionType, setTotalUsersCountActionType,
     setUsersActionType,
     unfollowActionType,
     UsersReducer

@@ -1,10 +1,10 @@
 import {UsersPageType, UsersType} from "./redux-store";
 
-export type followActionType = ReturnType<typeof followAC>
-export type unfollowActionType = ReturnType<typeof unfollowAC>
-export type setUsersActionType = ReturnType<typeof setUsersAC>
-export type setCurrentPageActionType = ReturnType<typeof setCurrentPageAC>
-export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCountAC>
+export type followActionType = ReturnType<typeof follow>
+export type unfollowActionType = ReturnType<typeof unfollow>
+export type setUsersActionType = ReturnType<typeof setUsers>
+export type setCurrentPageActionType = ReturnType<typeof setCurrentPage>
+export type setTotalUsersCountActionType = ReturnType<typeof setTotalUsersCount>
 
 let initialState: UsersPageType = {
     users: [],
@@ -36,27 +36,27 @@ export const UsersReducer = (state = initialState, action: any) => {
     }
 };
 
-export const unfollowAC = (userID: number) => {
+export const unfollow = (userID: number) => {
     return {
         type: 'UNFOLLOW', userID
     } as const
 }
-export const followAC = (userID: number) => {
+export const follow = (userID: number) => {
     return {
         type: 'FOLLOW', userID
     } as const
 }
-export const setUsersAC = (users: UsersType[]) => {
+export const setUsers = (users: UsersType[]) => {
     return {
         type: 'SET-USERS', users
     } as const
 }
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE', currentPage
     } as const
 }
-export const setTotalUsersCountAC = (totalCount: number) => {
+export const setTotalUsersCount = (totalCount: number) => {
     return {
         type: 'SET-TOTAL-USERS-COUNT', totalCount
     } as const
