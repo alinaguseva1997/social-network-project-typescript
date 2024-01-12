@@ -1,24 +1,18 @@
 import React from 'react';
-import {AddPostActionType, ProfilePageReducer, UpdateNewPostTextActionType} from "./profilePage-reducer";
-import {DialogsPageReducer, sendNewMessageTextActionType, UpdateNewMessageTextActionType} from "./dialogsPage-reducer";
+import {
+    ProfilePageReducer,
+} from "./profilePage-reducer";
+import {DialogsPageReducer} from "./dialogsPage-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
+import {ActionType, stateType, StoreType} from "./redux-store";
 
-export type storeType = {
-    _state: stateType
-    getState: () => stateType
-    _callSubscriber: (state: stateType) => void
-    subscribe: (observer: (state: stateType) => void) => void
-    dispatch: (action: ActionType) => void
-}
-export type stateType = {
-    profilePage: profilePageType
-    dialogsPage: dialogsPageType
-    sidebar: sidebarType
-}
-export type profilePageType ={
-    posts: postsDataType[]
-    newPostText: string
-}
+// export type storeType = {
+//     _state: stateType
+//     getState: () => stateType
+//     _callSubscriber: (state: stateType) => void
+//     subscribe: (observer: (state: stateType) => void) => void
+//     dispatch: (action: ActionType) => void
+// }
 export type dialogsPageType = {
     dialogs: dialogsDataType[]
     messages: messagesDataType[]
@@ -40,13 +34,8 @@ export type postsDataType = {
     message: string
     likesCount: number
 }
-export type ActionType =
-    | AddPostActionType
-    | UpdateNewPostTextActionType
-    | UpdateNewMessageTextActionType
-    | sendNewMessageTextActionType
 
-let store: storeType = {
+let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -81,7 +70,7 @@ let store: storeType = {
     getState () {
         return this._state
     },
-    subscribe(observer) {
+    subscribe(observer:(state: stateType) => void) {
         this._callSubscriber = observer
     },
     dispatch (action: ActionType) {

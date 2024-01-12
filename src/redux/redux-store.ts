@@ -1,11 +1,16 @@
 import {combineReducers, createStore} from "redux";
-import {AddPostActionType, ProfilePageReducer, UpdateNewPostTextActionType} from "./profilePage-reducer";
+import {
+    AddPostActionType,
+    ProfilePageReducer,
+    SetUserProfileActionType,
+    UpdateNewPostTextActionType
+} from "./profilePage-reducer";
 import {DialogsPageReducer, sendNewMessageTextActionType, UpdateNewMessageTextActionType} from "./dialogsPage-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
 import {
     followActionType,
     setCurrentPage, setCurrentPageActionType, setTotalUsersCountActionType,
-    setUsersActionType,
+    setUsersActionType, toggleIsFetchingActionType,
     unfollowActionType,
     UsersReducer
 } from "./users-reducer";
@@ -20,7 +25,27 @@ export type stateType = {
 export type profilePageType ={
     posts: postsDataType[]
     newPostText: string
+    profile: UserProfileType
 }
+
+export type UserProfileType = UsersType & {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsUserType
+}
+export type ContactsUserType = {
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
+}
+
 export type dialogsPageType = {
     dialogs: dialogsDataType[]
     messages: messagesDataType[]
@@ -47,25 +72,30 @@ export type UsersPageType = {
     pageSize: number,
     totalCount: number
     currentPage: number
+    isFetching: boolean
 }
 export type UsersType = {
     id: number
-    photoURL: string
-    followed: boolean
-    fullName: string
+    name: string
     status: string
-    location: {city: string, country: string}
+    followed: boolean
+    photos: {
+        small: string
+        large: string
+    }
 }
 export type ActionType =
-| AddPostActionType
-| UpdateNewPostTextActionType
-| UpdateNewMessageTextActionType
-| sendNewMessageTextActionType
-| followActionType
-| unfollowActionType
-| setUsersActionType
-| setCurrentPageActionType
-| setTotalUsersCountActionType
+    | AddPostActionType
+    | UpdateNewPostTextActionType
+    | UpdateNewMessageTextActionType
+    | sendNewMessageTextActionType
+    | followActionType
+    | unfollowActionType
+    | setUsersActionType
+    | setCurrentPageActionType
+    | setTotalUsersCountActionType
+    | toggleIsFetchingActionType
+    | SetUserProfileActionType
 
 export const rootReducer = combineReducers({
     profilePage: ProfilePageReducer,

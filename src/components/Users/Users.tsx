@@ -1,6 +1,8 @@
 import s from "./Users.module.css";
 import React from "react";
 import {UsersPageType} from "../../redux/redux-store";
+import {NavLink} from "react-router-dom";
+import user from "../../images/user.svg"
 
 export type UsersTypeProps = UsersPageType & {
     onPageChanged: (pageNumber: number) => void
@@ -13,13 +15,12 @@ export const Users = (props: UsersTypeProps) => {
     let pages = [];
     for (let i=1; i <= pagesCount; i++) {
         pages.push(i)
-        console.log(pages)
     }
     return (
         <div>
             <div>
                 {pages.map(p => {
-                    return <span onClick={(e)=>props.onPageChanged(p)}
+                    return <span key={p} onClick={(e)=>props.onPageChanged(p)}
                                  className={props.currentPage === p ? s.selectedPage : ''}>{p}</span>
                 })}
             </div>
@@ -27,7 +28,9 @@ export const Users = (props: UsersTypeProps) => {
                 props.users.map(el => <div key={el.id}>
                     <span>
                         <div>
-                            <img className={s.photo} src={el.photoURL} alt = {''}/>
+                            <NavLink to={'/profile/' + el.id}>
+                                <img className={s.photo} src={el.photos.small === null ? user : el.photos.small} alt={''}/>
+                            </NavLink>
                         </div>
                         <div>
                             {el.followed ?
@@ -37,8 +40,8 @@ export const Users = (props: UsersTypeProps) => {
                     </span>
                     <span>
                         <span>
-                            <div>{'el.fullName'}</div>
-                            <div>{'el.status'}</div>
+                            <div>{el.name}</div>
+                            <div>{el.status}</div>
                         </span>
                         <span>
                             <div>{'el.location.country'}</div>
