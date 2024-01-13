@@ -8,8 +8,7 @@ import {
 import {DialogsPageReducer, sendNewMessageTextActionType, UpdateNewMessageTextActionType} from "./dialogsPage-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
 import {
-    followActionType,
-    setCurrentPage, setCurrentPageActionType, setTotalUsersCountActionType,
+    followActionType, setCurrentPageActionType, setTotalUsersCountActionType,
     setUsersActionType, toggleIsFetchingActionType,
     unfollowActionType,
     UsersReducer
