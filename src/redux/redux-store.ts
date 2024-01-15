@@ -13,14 +13,17 @@ import {
     unfollowActionType,
     UsersReducer
 } from "./users-reducer";
+import {AuthReducer, setAuthUserDataActionType} from "./auth-reducer";
 
 export type StoreType = any
-export type stateType = {
-    profilePage: profilePageType
-    dialogsPage: dialogsPageType
-    sidebar: sidebarType
-    usersPage: UsersPageType
+
+export type AuthType = {
+    id: number
+    email: string
+    login: string
+    isAuth: boolean
 }
+
 export type profilePageType ={
     posts: postsDataType[]
     newPostText: string
@@ -95,8 +98,18 @@ export type ActionType =
     | setTotalUsersCountActionType
     | toggleIsFetchingActionType
     | SetUserProfileActionType
+    | setAuthUserDataActionType
+
+export type stateType = {
+    auth: AuthType
+    profilePage: profilePageType
+    dialogsPage: dialogsPageType
+    sidebar: sidebarType
+    usersPage: UsersPageType
+}
 
 export const rootReducer = combineReducers({
+    auth: AuthReducer,
     profilePage: ProfilePageReducer,
     dialogsPage: DialogsPageReducer,
     sidebar: SidebarReducer,
