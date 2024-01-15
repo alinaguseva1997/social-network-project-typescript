@@ -4,6 +4,7 @@ import axios from "axios";
 import {connect} from "react-redux";
 import {setAuthUserData} from "../../redux/auth-reducer";
 import {AuthType, stateType} from "../../redux/redux-store";
+import {usersAPI} from "../../api/api";
 
 export type HeaderContainerPropsType = {
     // children?: ReactNode
@@ -15,10 +16,10 @@ export type HeaderContainerPropsType = {
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
     componentDidMount() {
         // this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
-            .then((res) => {
-                if (res.data.resultCode === 0 ) {
-                    let {id,login, email} = res.data.data
+        usersAPI.getAuthUserData()
+            .then((data) => {
+                if (data.resultCode === 0 ) {
+                    let {id,login, email} = data.data
                     this.props.setAuthUserData(id,login, email)
                 }
             })
