@@ -3,7 +3,6 @@ import React from "react";
 import {UsersPageType} from "../../redux/redux-store";
 import {NavLink} from "react-router-dom";
 import user from "../../images/user.svg"
-import axios from "axios";
 import {usersAPI} from "../../api/api";
 
 export type UsersTypeProps = UsersPageType & {
