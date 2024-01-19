@@ -13,13 +13,10 @@ type MyPostsPropsType = {
 export function MyPosts(props: MyPostsPropsType) {
 
     const postsMap = props.posts.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
-
     let newPostEl = React.createRef<HTMLTextAreaElement>();
-
     const onAddPost = () => {
             props.addPost()
     }
-
     const onPostChangeHangler = () => {
         if (newPostEl.current) {
             let newText = newPostEl.current.value

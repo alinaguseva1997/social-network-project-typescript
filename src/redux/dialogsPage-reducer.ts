@@ -40,16 +40,5 @@ export const DialogsPageReducer = (state = initialState, action:ActionType) => {
     }
 }
 
-export const updateNewMessageTextAC = (newMessage: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
-        newMessage: newMessage
-    } as const
-}
-
-export const sendNewMessageTextAC = (newMessage: string) => {
-    return {
-        type: "SEND-MESSAGE",
-        newMessage: newMessage
-    } as const
-}
+export const updateNewMessageTextAC = (newMessage: string) => ({type: "UPDATE-NEW-MESSAGE-TEXT", newMessage} as const)
+export const sendNewMessageTextAC = (newMessage: string) => ({type: "SEND-MESSAGE", newMessage} as const)
