@@ -9,7 +9,7 @@ import {DialogsPageReducer, sendNewMessageTextActionType, UpdateNewMessageTextAc
 import {SidebarReducer} from "./sidebar-reducer";
 import {
     followActionType, setCurrentPageActionType, setTotalUsersCountActionType,
-    setUsersActionType, toggleIsFetchingActionType,
+    setUsersActionType, toggleFollowingProgressActionType, toggleIsFetchingActionType,
     unfollowActionType,
     UsersReducer
 } from "./users-reducer";
@@ -75,6 +75,7 @@ export type UsersPageType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: []
 }
 export type UsersType = {
     id: number
@@ -99,6 +100,7 @@ export type ActionType =
     | toggleIsFetchingActionType
     | SetUserProfileActionType
     | setAuthUserDataActionType
+    | toggleFollowingProgressActionType
 
 export type stateType = {
     auth: AuthType

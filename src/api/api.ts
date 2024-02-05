@@ -18,7 +18,7 @@ export const usersAPI = {
            .then(res => res.data)
     },
     follow(id: number) {
-       return instance.post(`/follow/${id}`, {})
+       return instance.post(`/follow/${id}`)
            .then(res => res.data)
     },
     getAuthUserData() {
