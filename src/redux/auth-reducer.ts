@@ -1,7 +1,6 @@
 import {ActionType, AuthType} from "./redux-store";
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
-import {toggleIsFetching} from "./users-reducer";
 
 let initialState: AuthType = {
     id: 0,
