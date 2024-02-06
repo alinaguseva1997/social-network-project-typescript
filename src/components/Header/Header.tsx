@@ -1,9 +1,9 @@
 import React, {ReactNode} from 'react';
 import styles from './Header.module.css'
 import {NavLink} from "react-router-dom";
+import {AuthType} from "../../redux/redux-store";
 
 export type HeaderPropsType = {
-    children?: ReactNode
     isAuth: boolean
     login: string
 }

@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {
     AddPostActionType,
     ProfilePageReducer,
@@ -14,6 +14,7 @@ import {
     UsersReducer
 } from "./users-reducer";
 import {AuthReducer, setAuthUserDataActionType} from "./auth-reducer";
+import {thunk} from "redux-thunk";
 
 export type StoreType = any
 
@@ -117,4 +118,4 @@ export const rootReducer = combineReducers({
     sidebar: SidebarReducer,
     usersPage: UsersReducer
 })
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware(thunk));
