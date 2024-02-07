@@ -65,7 +65,7 @@ export const addPostAC = () => ({type: "ADD-POST"} as const)
 export const updateNewPostTextAC = (newText: string) => ({type: "UPDATE-NEW-POST-TEXT", newText} as const)
 export const setUserProfile = (profile: UserProfileType) => ({type: "SET-USER-PROFILE", profile} as const)
 
-export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
+export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
     usersAPI.getUserProfile(userId)
         .then((data) => {
             dispatch(setUserProfile(data))

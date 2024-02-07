@@ -1,9 +1,8 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, ReactNode} from "react";
 import styles from './Dialogs.module.css'
 import {DialogItem} from "./DialogsItem/DialogItem";
 import {Message} from "./Message/Message";
 import {dialogsPageType} from "../../redux/store";
-import {Redirect} from "react-router-dom";
 
 type DialogsPropsType = {
     dialogsPage: dialogsPageType
@@ -11,12 +10,13 @@ type DialogsPropsType = {
     updateNewMessageText: (body: string) => void
     newMessageText: string
     isAuth: boolean
+    children: ReactNode
 }
 
-export function Dialogs(props: DialogsPropsType) {
-
-    let dialogsMap = props.dialogsPage.dialogs.map(el => <DialogItem name={el.name} id={el.id} />)
-    let messagesMap = props.dialogsPage.messages.map(el => <Message message={el.message} />)
+export const Dialogs = (props: DialogsPropsType) => {
+    debugger
+    let dialogsMap = props.dialogsPage.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id} />)
+    let messagesMap = props.dialogsPage.messages.map(el => <Message key={el.id} message={el.message} />)
 
     const onClickSendMessageHandler = () => {
         props.sendNewMessageText()
@@ -24,8 +24,6 @@ export function Dialogs(props: DialogsPropsType) {
     let onNewMessageChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageText(e.currentTarget.value)
     }
-
-    if(!props.isAuth) return <Redirect to={'/login'} />
 
     return (
         <div>

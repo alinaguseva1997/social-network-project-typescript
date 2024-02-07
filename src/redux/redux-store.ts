@@ -72,7 +72,7 @@ export type postsDataType = {
 }
 export type UsersPageType = {
     users: UsersType[]
-    pageSize: number,
+    pageSize: number
     totalCount: number
     currentPage: number
     isFetching: boolean

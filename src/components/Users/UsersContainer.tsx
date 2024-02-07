@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {stateType, UsersPageType} from "../../redux/redux-store";
+import {stateType, UserProfileType, UsersPageType, UsersType} from "../../redux/redux-store";
 import {
     followTC, getUsersTC,
     setCurrentPage,
@@ -9,8 +9,11 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
-export type UsersPropsType = UsersPageType & {
+export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
+export type mapStateToPropsType = UsersPageType
+export type mapDispatchToPropsType = {
     followTC: (userID: number)=>void
     unfollowTC: (userID: number)=> void
     setCurrentPage: (currentPage: number) => void
@@ -42,7 +45,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
-export const mapStateToProps = (state: stateType) => {
+export const mapStateToProps = (state: stateType):mapStateToPropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -53,5 +56,7 @@ export const mapStateToProps = (state: stateType) => {
     }
 }
 
+let AuthRedirectComponent = WithAuthRedirect(UsersContainer)
+
 export default connect (mapStateToProps,
-    {followTC, unfollowTC, setCurrentPage, toggleFollowingProgress, getUsersTC})(UsersContainer)
+    {followTC, unfollowTC, setCurrentPage, toggleFollowingProgress, getUsersTC})(AuthRedirectComponent)
