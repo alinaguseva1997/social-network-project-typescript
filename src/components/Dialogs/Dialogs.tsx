@@ -1,8 +1,8 @@
-import React, {ChangeEvent, ReactNode} from "react";
+import React, {ChangeEvent} from "react";
 import styles from './Dialogs.module.css'
 import {DialogItem} from "./DialogsItem/DialogItem";
 import {Message} from "./Message/Message";
-import {dialogsPageType} from "../../redux/store";
+import {dialogsPageType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
     dialogsPage: dialogsPageType
@@ -10,13 +10,12 @@ type DialogsPropsType = {
     updateNewMessageText: (body: string) => void
     newMessageText: string
     isAuth: boolean
-    children: ReactNode
+    // children: ReactNode
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
-    debugger
-    let dialogsMap = props.dialogsPage.dialogs.map(el => <DialogItem key={el.id} name={el.name} id={el.id} />)
-    let messagesMap = props.dialogsPage.messages.map(el => <Message key={el.id} message={el.message} />)
+    let dialogsMap = props.dialogsPage.dialogs?.map(el => <DialogItem key={el.id} name={el.name} id={el.id} />)
+    let messagesMap = props.dialogsPage.messages?.map(el => <Message key={el.id} message={el.message} />)
 
     const onClickSendMessageHandler = () => {
         props.sendNewMessageText()

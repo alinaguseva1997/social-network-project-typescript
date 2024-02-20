@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
 import {UserProfileType} from "../../../redux/redux-store";
+import ProfileStatus from "./ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile: UserProfileType
@@ -9,11 +10,12 @@ type ProfileInfoPropsType = {
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
     return (
         <>
-            <div>
+{/*            <div>
             <img
                 src="https://img.freepik.com/premium-photo/christian-woman-holds-bible-in-her-hands-reading-the-holy-bible-on-the-sea-during-beautiful-sunset_176445-5868.jpg?w=740"
                 alt="image"/>
-            </div>
+            </div>*/}
+            <ProfileStatus status = {'hello'}/>
             <div className={styles.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
                 <h2>{props.profile.fullName}</h2>
