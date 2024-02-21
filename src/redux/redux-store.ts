@@ -1,7 +1,7 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {
     AddPostActionType,
-    ProfilePageReducer,
+    ProfilePageReducer, SetStatusProfileActionType,
     SetUserProfileActionType,
     UpdateNewPostTextActionType
 } from "./profilePage-reducer";
@@ -29,6 +29,7 @@ export type profilePageType ={
     posts: postsDataType[]
     newPostText: string
     profile: UserProfileType
+    status: string
 }
 
 export type UserProfileType = UsersType & {
@@ -102,6 +103,7 @@ export type ActionType =
     | SetUserProfileActionType
     | setAuthUserDataActionType
     | toggleFollowingProgressActionType
+    | SetStatusProfileActionType
 
 export type stateType = {
     auth: AuthType

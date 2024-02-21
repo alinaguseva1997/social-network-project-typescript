@@ -5,12 +5,14 @@ import {UserProfileType} from "../../redux/redux-store";
 
 export type ProfilePropsType = {
     profile: UserProfileType
+    status: string
+    updateUserStatusTC: (status: string) => void
 }
 
 export function Profile(props: ProfilePropsType) {
     return (
         <div>
-            <ProfileInfo profile = {props.profile}/>
+            <ProfileInfo status={props.status} profile = {props.profile} updateUserStatusTC={props.updateUserStatusTC}/>
             <MyPostsContainer/>
         </div>
     )
