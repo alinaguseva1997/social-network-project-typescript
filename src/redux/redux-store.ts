@@ -3,9 +3,8 @@ import {
     AddPostActionType,
     ProfilePageReducer, SetStatusProfileActionType,
     SetUserProfileActionType,
-    UpdateNewPostTextActionType
 } from "./profilePage-reducer";
-import {DialogsPageReducer, sendNewMessageTextActionType, UpdateNewMessageTextActionType} from "./dialogsPage-reducer";
+import {DialogsPageReducer, sendNewMessageTextActionType} from "./dialogsPage-reducer";
 import {SidebarReducer} from "./sidebar-reducer";
 import {
     followActionType, setCurrentPageActionType, setTotalUsersCountActionType,
@@ -92,8 +91,6 @@ export type UsersType = {
 }
 export type ActionType =
     | AddPostActionType
-    | UpdateNewPostTextActionType
-    | UpdateNewMessageTextActionType
     | sendNewMessageTextActionType
     | followActionType
     | unfollowActionType

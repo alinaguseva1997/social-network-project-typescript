@@ -36,14 +36,10 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType>{
     }
     render () {
         return (
-            <div>
                 <Profile {...this.props} profile = {this.props.profile} status={this.props.status} updateUserStatusTC={this.props.updateUserStatusTC}/>
-            </div>
         )
     }
 }
-
-let AuthRedirectComponent = WithAuthRedirect(ProfileContainer)
 
 let mapStateToProps = (state: stateType): MapStatePropsType => {
     return {
@@ -53,4 +49,4 @@ let mapStateToProps = (state: stateType): MapStatePropsType => {
 }
 export default compose<ComponentType>( connect (mapStateToProps, {getUserProfileTC,getUserStatusTC, updateUserStatusTC}),
     withRouter,
-    WithAuthRedirect)(ProfileContainer)
+/*    WithAuthRedirect*/)(ProfileContainer)
