@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {stateType, UserProfileType, UsersPageType, UsersType} from "../../redux/redux-store";
+import { UsersPageType} from "../../redux/redux-store";
 import {
     followTC, getUsersTC,
     setCurrentPage,
@@ -46,14 +46,14 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
-export const mapStateToProps = (state: stateType):mapStateToPropsType => {
+export const mapStateToProps = (state: UsersPageType):mapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: state.users,
+        pageSize: state.pageSize,
+        totalCount: state.totalCount,
+        currentPage: state.currentPage,
+        isFetching: state.isFetching,
+        followingInProgress: state.followingInProgress
     }
 }
 

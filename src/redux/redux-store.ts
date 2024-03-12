@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {
     AddPostActionType,
     ProfilePageReducer, SetStatusProfileActionType,
@@ -16,10 +16,8 @@ import {AuthReducer, setAuthUserDataActionType} from "./auth-reducer";
 import {thunk} from "redux-thunk";
 import {reducer as formReducer } from "redux-form";
 
-export type StoreType = any
-
 export type AuthType = {
-    id: number
+    id: any
     email: string
     login: string
     isAuth: boolean
@@ -103,14 +101,7 @@ export type ActionType =
     | toggleFollowingProgressActionType
     | SetStatusProfileActionType
 
-export type stateType = {
-    auth: AuthType
-    profilePage: profilePageType
-    dialogsPage: dialogsPageType
-    sidebar: sidebarType
-    usersPage: UsersPageType
-}
-
+export type RootStateType = ReturnType<typeof rootReducer>
 export const rootReducer = combineReducers({
     auth: AuthReducer,
     profilePage: ProfilePageReducer,
@@ -119,4 +110,4 @@ export const rootReducer = combineReducers({
     usersPage: UsersReducer,
     form: formReducer
 })
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));

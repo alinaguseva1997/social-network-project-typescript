@@ -1,4 +1,4 @@
-import {sidebarType} from "./store";
+import {sidebarType} from "./redux-store";
 
 let initialState: sidebarType = {}
 

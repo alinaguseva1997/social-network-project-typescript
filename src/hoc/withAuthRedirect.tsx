@@ -1,14 +1,14 @@
 import React, {ComponentType} from 'react';
 import {Redirect} from "react-router-dom";
-import {stateType} from "../redux/redux-store";
 import {connect} from "react-redux";
+import {AuthType} from "../redux/redux-store";
 
 type mapStateToPropsForRedirectType = {
     isAuth: boolean
 }
-let mapStateToPropsForRedirect = (state: stateType): mapStateToPropsForRedirectType => {
+let mapStateToPropsForRedirect = (state: AuthType): mapStateToPropsForRedirectType => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.isAuth
     }
 }
 

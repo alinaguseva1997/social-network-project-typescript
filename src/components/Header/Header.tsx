@@ -1,11 +1,11 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import styles from './Header.module.css'
 import {NavLink} from "react-router-dom";
-import {AuthType} from "../../redux/redux-store";
 
 export type HeaderPropsType = {
     isAuth: boolean
     login: string
+    logoutTC: () => void
 }
 export function Header(props: HeaderPropsType) {
     return (
@@ -14,8 +14,11 @@ export function Header(props: HeaderPropsType) {
                  alt="logo"/>
 
             <div className={styles.loginBlock}>
-                {props.isAuth ? props.login
-            :<NavLink to={'/login'}>Login</NavLink>
+                {props.isAuth
+                    ? <div>{props.login}
+                        <button onClick={props.logoutTC}>Log out</button>
+                    </div>
+                    :<NavLink to={'/login'}>Login</NavLink>
                 }
             </div>
         </header>

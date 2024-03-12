@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLength, required} from "../../utils/validators/validators";
+import { required} from "../../utils/validators/validators";
 import {Input} from "../common/FormsControls/FormsControls";
 
 export type FormDataType = {
@@ -16,7 +16,7 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                 <Field type="text" placeholder={'Login'} name={'Login'} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field type="text" placeholder={'Password'} name={'Password'} component={Input} validate={[required]}/>
+                <Field type="password" placeholder={'Password'} name={'Password'} component={Input} validate={[required]}/>
             </div>
             <div>
                 <Field type="checkbox" name={'Remember me'} component={'input'}/> Remember me
