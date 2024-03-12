@@ -2,7 +2,9 @@ import React from "react";
 import {Post} from './Post/Post'
 import styles from './MyPosts.module.css'
 import {postsDataType} from "../../../redux/redux-store";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLength, required} from "../../../utils/validators/validators";
+import {Textarea} from "../../common/FormsControls/FormsControls";
 
 type MyPostsPropsType = {
     posts: postsDataType[]
@@ -32,11 +34,14 @@ export function MyPosts(props: MyPostsPropsType) {
 type AddNewPostFormType = {
     newPostText: string
 }
-const AddNewPost = (props: any) => {
+
+const maxLength10 = maxLength(10)
+
+const AddNewPost = (props: InjectedFormProps<AddNewPostFormType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={'textarea'} name={'newPostText'} placeholder={'Enter your text'}/>
+                <Field component={Textarea} name={'newPostText'} placeholder={'Enter your text'} validate={[required, maxLength10]}/>
             </div>
             <div>
                 <button>add post</button>
@@ -45,6 +50,6 @@ const AddNewPost = (props: any) => {
     )
 }
 
-const AddNewPostFormRedux = reduxForm({
+const AddNewPostFormRedux = reduxForm<AddNewPostFormType>({
     form: "profileAddNewPostForm"
 })(AddNewPost)
