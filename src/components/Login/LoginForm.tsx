@@ -5,7 +5,7 @@ import {Input} from "../common/FormsControls/FormsControls";
 import s from './../common/FormsControls/FormsControls.module.css'
 
 export type FormDataType = {
-    login: string
+    email: string
     password: string
     rememberMe: boolean
 }
@@ -14,13 +14,13 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field type="text" placeholder={'Login'} name={'Login'} component={Input} validate={[required]}/>
+                <Field type="text" placeholder={'email'} name={'email'} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field type="password" placeholder={'Password'} name={'Password'} component={Input} validate={[required]}/>
+                <Field type="password" placeholder={'password'} name={'password'} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field type="checkbox" name={'Remember me'} component={'input'}/> Remember me
+                <Field type="checkbox" name={'rememberMe'} component={'input'}/> Remember me
             </div>
 
             {props.error && <div className={s.formSummaryError}>{props.error}</div>}

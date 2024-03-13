@@ -2,8 +2,8 @@ import {ActionType, AuthType, RootStateType} from "./redux-store";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
-import {FormAction, stopSubmit} from "redux-form";
-import {LoginForm} from "../components/Login/LoginForm";
+import {stopSubmit} from "redux-form";
+import {initializeAppTC, initializedSuccess} from "./app-reducer";
 
 let initialState: AuthType = {
     id: null,
@@ -26,10 +26,10 @@ export const AuthReducer = (state = initialState, action: ActionType) => {
 export const setAuthUserData = (id:any, login: string, email: string, isAuth: boolean) => ({type: "SET-USER-DATA", payload: {id,login, email, isAuth}} as const)
 
 export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
-    authAPI.me()
+   return authAPI.me()
         .then((res) => {
             if (res.data.resultCode === 0 ) {
-                let {id,login, email} = res.data
+                let {id,login, email} = res.data.data
                 dispatch(setAuthUserData(id,login, email, true))
             }
         })

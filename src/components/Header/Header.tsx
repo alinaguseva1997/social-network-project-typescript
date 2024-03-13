@@ -18,7 +18,7 @@ export function Header(props: HeaderPropsType) {
                     ? <div>{props.login}
                         <button onClick={props.logoutTC}>Log out</button>
                     </div>
-                    :<NavLink to={'/login'}>Login</NavLink>
+                    : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>
         </header>

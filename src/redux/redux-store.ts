@@ -15,6 +15,7 @@ import {
 import {AuthReducer, setAuthUserDataActionType} from "./auth-reducer";
 import {thunk} from "redux-thunk";
 import {reducer as formReducer } from "redux-form";
+import {AppReducer, initializedSuccess} from "./app-reducer";
 
 export type AuthType = {
     id: any
@@ -100,9 +101,11 @@ export type ActionType =
     | setAuthUserDataActionType
     | toggleFollowingProgressActionType
     | SetStatusProfileActionType
+    | ReturnType<typeof initializedSuccess>
 
 export type RootStateType = ReturnType<typeof rootReducer>
 export const rootReducer = combineReducers({
+    app: AppReducer,
     auth: AuthReducer,
     profilePage: ProfilePageReducer,
     dialogsPage: DialogsPageReducer,
@@ -111,3 +114,6 @@ export const rootReducer = combineReducers({
     form: formReducer
 })
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
+
+//@ts-ignore
+window.store = store
