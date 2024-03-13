@@ -1,7 +1,8 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import { required} from "../../utils/validators/validators";
+import {required} from "../../utils/validators/validators";
 import {Input} from "../common/FormsControls/FormsControls";
+import s from './../common/FormsControls/FormsControls.module.css'
 
 export type FormDataType = {
     login: string
@@ -21,6 +22,9 @@ export const LoginForm = (props: InjectedFormProps<FormDataType>) => {
             <div>
                 <Field type="checkbox" name={'Remember me'} component={'input'}/> Remember me
             </div>
+
+            {props.error && <div className={s.formSummaryError}>{props.error}</div>}
+
             <div>
                 <button>Login</button>
             </div>

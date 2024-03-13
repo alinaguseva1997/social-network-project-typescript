@@ -11,3 +11,9 @@
     display: block;
     color: red;
 }
+
+.formSummaryError {
+    padding: 5px;
+    color: red;
+    background-color: #e7dede;
+}

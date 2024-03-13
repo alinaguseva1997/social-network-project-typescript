@@ -2,6 +2,8 @@ import {ActionType, AuthType, RootStateType} from "./redux-store";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
+import {FormAction, stopSubmit} from "redux-form";
+import {LoginForm} from "../components/Login/LoginForm";
 
 let initialState: AuthType = {
     id: null,
@@ -32,11 +34,14 @@ export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
             }
         })
 }
-export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: ThunkDispatch<RootStateType, unknown, ActionType>) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
     authAPI.login(email,password,rememberMe)
         .then((res) => {
             if (res.data.resultCode === 0 ) {
                 dispatch(getAuthUserDataTC())
+            } else {
+                let message = res.data.messages.length > 0 ? res.data.messages[0] : 'Some error'
+                dispatch(stopSubmit('login', {_error: message}))
             }
         })
 }
