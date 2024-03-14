@@ -3,7 +3,6 @@ import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {stopSubmit} from "redux-form";
-import {initializeAppTC, initializedSuccess} from "./app-reducer";
 
 let initialState: AuthType = {
     id: null,
