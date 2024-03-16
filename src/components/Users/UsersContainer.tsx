@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import { UsersPageType} from "../../redux/redux-store";
+import {RootStateType, UsersType} from "../../redux/redux-store";
 import {
     followTC, getUsersTC,
     setCurrentPage,
@@ -10,23 +10,38 @@ import React, {ComponentType} from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalCount,
+    getUsers
+} from "../../redux/users-selectors";
 
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
-export type mapStateToPropsType = UsersPageType
+export type mapStateToPropsType = {
+    currentPage: number
+    pageSize: number
+    isFetching: boolean
+    users: UsersType[]
+    totalCount: number
+    followingInProgress: number[]
+}
 export type mapDispatchToPropsType = {
     followTC: (userID: number)=>void
     unfollowTC: (userID: number)=> void
     setCurrentPage: (currentPage: number) => void
-    toggleFollowingProgress: (followingInProgress: boolean, userID: number) => void
-    getUsersTC: (currentPage: number, pageSize: number) => void
+    toggleFollowingProgress: (isFetching: boolean, userID: number) => void
+    getUsersTC: (page: number, pageSize: number) => void
 }
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
     }
-    onPageChanged (currentPage: number) {
-        this.props.getUsersTC(currentPage, this.props.pageSize)
+    onPageChanged = (page: number) => {
+        this.props.getUsersTC(page, this.props.pageSize)
     }
 
     render() {
@@ -45,14 +60,14 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
-export const mapStateToProps = (state: UsersPageType):mapStateToPropsType => {
+export const mapStateToProps = (state: RootStateType) => {
     return {
-        users: state.users,
-        pageSize: state.pageSize,
-        totalCount: state.totalCount,
-        currentPage: state.currentPage,
-        isFetching: state.isFetching,
-        followingInProgress: state.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalCount: getTotalCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 

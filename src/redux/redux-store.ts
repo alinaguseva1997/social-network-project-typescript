@@ -76,7 +76,7 @@ export type UsersPageType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: []
+    followingInProgress: number[]
 }
 export type UsersType = {
     id: number

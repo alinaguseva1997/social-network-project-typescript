@@ -6,6 +6,7 @@ import {RootStateType, UserProfileType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {getAuthorizedUserId, getIsAuth, getProfile, getStatus} from "../../redux/profile-selectors";
 
 export type  PropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -51,10 +52,10 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType>{
 
 let mapStateToProps = (state: RootStateType): MapStatePropsType => {
     return {
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        authorizedUserId: state.auth.id,
-        isAuth: state.auth.isAuth
+        profile: getProfile(state),
+        status: getStatus(state),
+        authorizedUserId: getAuthorizedUserId(state),
+        isAuth: getIsAuth(state)
     }
 }
 export default compose<ComponentType>( connect (mapStateToProps, {getUserProfileTC,getUserStatusTC, updateUserStatusTC}),

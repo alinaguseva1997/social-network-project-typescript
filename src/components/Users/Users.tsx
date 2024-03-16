@@ -13,14 +13,14 @@ export type UsersTypeProps = UsersPageType & {
 export const Users = (props: UsersTypeProps) => {
     let pagesCount = Math.ceil(props.totalCount / props.pageSize);
     let pages = [];
-    for (let i=1; i <= pagesCount; i++) {
+    for (let i= 1; i <= pagesCount; i++) {
         pages.push(i)
     }
     return (
         <div>
             <div>
                 {pages.map(p => {
-                    return <span key={p} onClick={(e)=>props.onPageChanged(p)}
+                    return <span key={p} onClick={()=>props.onPageChanged(p)}
                                  className={props.currentPage === p ? s.selectedPage : ''}>{p}</span>
                 })}
             </div>

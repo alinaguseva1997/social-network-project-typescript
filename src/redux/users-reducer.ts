@@ -1,4 +1,4 @@
-import {UsersPageType, UsersType} from "./redux-store";
+import {ActionType, UsersPageType, UsersType} from "./redux-store";
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
 
@@ -19,7 +19,7 @@ let initialState: UsersPageType = {
     followingInProgress: []
 }
 
-export const UsersReducer = (state = initialState, action: any) => {
+export const UsersReducer = (state = initialState, action: ActionType): UsersPageType => {
     switch (action.type) {
         case 'SET-USERS' : {
             return {...state, users: [...action.users]}
@@ -40,9 +40,7 @@ export const UsersReducer = (state = initialState, action: any) => {
             return {...state, isFetching: action.isFetching}
         }
         case 'TOGGLE-IS-FOLLOWING-PROGRESS' : {
-            return {...state, followingInProgress: action.followingInProgress
-                    ? [...state.followingInProgress, action.userID]
-                    : state.followingInProgress.filter(id => id !== action.userID)}
+            return {...state, followingInProgress: action.isFetching ? [...state.followingInProgress, action.userID] : state.followingInProgress.filter(id => id !== action.userID)}
         }
         default: {
             return state;
@@ -56,11 +54,13 @@ export const setUsers = (users: UsersType[]) => ({type: 'SET-USERS', users} as c
 export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage} as const)
 export const setTotalUsersCount = (totalCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalCount} as const)
 export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching} as const)
-export const toggleFollowingProgress = (followingInProgress: boolean, userID: number) => ({type: 'TOGGLE-IS-FOLLOWING-PROGRESS', followingInProgress, userID} as const)
+export const toggleFollowingProgress = (isFetching: boolean, userID: number) =>
+    ({type: 'TOGGLE-IS-FOLLOWING-PROGRESS', isFetching, userID} as const)
 
-export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+export const getUsersTC = (page: number, pageSize: number) => (dispatch: Dispatch) => {
     dispatch(toggleIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize)
+    dispatch(setCurrentPage(page))
+    usersAPI.getUsers(page, pageSize)
         .then((data) => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
